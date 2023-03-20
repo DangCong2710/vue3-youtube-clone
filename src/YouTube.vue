@@ -45,16 +45,23 @@ const YouTube = defineComponent({
       default: 'https://www.youtube.com',
     },
     vars: Object as PropType<PlayerVars>,
+    styleWrap: {
+      type: Object,
+    }
   },
   computed: {
     id(): string {
       return getYouTubeID(this.src) || this.src
     },
     wrapperStyle(): Record<string, string> {
-      return {
-        width: `${this.width}px`,
-        height: `${this.height}px`,
-        position: 'relative',
+      if(!this.styleWrap) {
+        return {
+          width: `${this.width}px`,
+          height: `${this.height}px`,
+          position: 'relative',
+        }
+      } else {
+        return this.styleWrap;
       }
     },
   },
